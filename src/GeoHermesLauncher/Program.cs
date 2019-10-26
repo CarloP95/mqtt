@@ -1,8 +1,7 @@
 ﻿using System;
-
 using System.Net.Mqtt;
 
-namespace HermesBroker
+namespace GeoHermesLauncher
 {
 	class Program
 	{
@@ -10,7 +9,8 @@ namespace HermesBroker
 		{
 			Console.WriteLine("Started Program to start broker...");
 
-			var mqttOptions = new MqttConfiguration {
+			var mqttOptions = new MqttConfiguration
+			{
 
 				BufferSize = 128 * 1024,
 				Port = 1883,
@@ -23,15 +23,17 @@ namespace HermesBroker
 			};
 
 			var broker = MqttServer.Create(mqttOptions);
-			try { 
+			try
+			{
 				broker.Start();
 				Console.WriteLine("Press CTRL + C exit.");
-				while(true)
+				while (true)
 				{
 					System.Threading.Thread.Sleep(1000);
 				}
 			}
-			catch(Exception ex) {
+			catch (Exception ex)
+			{
 				Console.WriteLine(ex);
 			}
 		}

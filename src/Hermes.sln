@@ -28,7 +28,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{E887D106
 		..\packages.config = ..\packages.config
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HermesBroker", "HermesBroker\HermesBroker.csproj", "{850687FA-552D-4469-B73D-403D5C2E48AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HermesBroker", "HermesBroker\HermesBroker.csproj", "{850687FA-552D-4469-B73D-403D5C2E48AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoHermesLauncher", "GeoHermesLauncher\GeoHermesLauncher.csproj", "{C5D9D4E4-58E9-4170-AB0D-D007BA13E4D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,6 +58,10 @@ Global
 		{850687FA-552D-4469-B73D-403D5C2E48AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{850687FA-552D-4469-B73D-403D5C2E48AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{850687FA-552D-4469-B73D-403D5C2E48AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5D9D4E4-58E9-4170-AB0D-D007BA13E4D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5D9D4E4-58E9-4170-AB0D-D007BA13E4D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5D9D4E4-58E9-4170-AB0D-D007BA13E4D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5D9D4E4-58E9-4170-AB0D-D007BA13E4D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
