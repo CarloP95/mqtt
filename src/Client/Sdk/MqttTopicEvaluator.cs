@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Net.Mqtt.Server.Sdk;
 
 namespace System.Net.Mqtt.Sdk
 {
@@ -81,8 +82,8 @@ namespace System.Net.Mqtt.Sdk
         /// successfully dispatch incoming messages of that topic name
         /// to the subscribers of the topic filter
         /// </summary>
-        /// <param name="topicName">Topic name to evaluate</param>
-        /// <param name="topicFilter">Topic filter to evaluate</param>
+        /// <param name="topicName">Topic name to evaluate, coming from Publish</param>
+        /// <param name="topicFilter">Topic filter to evaluate, coming from Subscription</param>
         /// <returns>A boolean value that indicates if the topic name matches with the topic filter</returns>
         /// <exception cref="MqttException">MqttException</exception>
         public bool Matches (string topicName, string topicFilter)
@@ -137,6 +138,27 @@ namespace System.Net.Mqtt.Sdk
 					matches = false;
 					break;
 				}
+			}
+
+			// Finally check if AllowLocationSubscription is true 
+			// if the two area have intersection
+			// The preminent infos are those from the subscription
+			if (configuration.AllowLocationSubscription) {
+				try { 
+					var publishGeoInfos = GeoTopicUnmashaller.Unmarshal(topicName);
+					var subscriptionGeoInfos = GeoTopicUnmashaller.Unmarshal(topicFilter);
+
+					var distance = DistanceCalculator.P2PDistanceBetweenLatLon(subscriptionGeoInfos, publishGeoInfos);
+					if (distance <= subscriptionGeoInfos.ShapeParameters) { //TODO: Support different shapes. Move to a class this decision.
+						matches = true;
+						Console.WriteLine($"Found distance lower than specified in {distance}, {subscriptionGeoInfos.ShapeParametersUnit}, {subscriptionGeoInfos.ShapeParameters} ");
+					}
+					Console.WriteLine($"Distance from {topicFilter}: required {subscriptionGeoInfos.ShapeParameters}{subscriptionGeoInfos.ShapeParametersUnit}, found {distance}");
+				}
+				catch (FormatException ex) {
+					// Is not necessary to do anything, is a normal topic, not a location one.
+				}
+
 			}
 
 			return matches;

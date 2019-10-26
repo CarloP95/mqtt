@@ -64,6 +64,8 @@ namespace System.Net.Mqtt.Sdk.Flows
 					if (clientSubscription != null) {
 						clientSubscription.MaximumQualityOfService = subscription.MaximumQualityOfService;
 					} else {
+
+						Console.WriteLine("Client just connected: " + clientId + " " + subscription.TopicFilter);
 						clientSubscription = new ClientSubscription {
 							ClientId = clientId,
 							TopicFilter = subscription.TopicFilter,
