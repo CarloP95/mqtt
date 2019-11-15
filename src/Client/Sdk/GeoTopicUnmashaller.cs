@@ -21,12 +21,17 @@ namespace System.Net.Mqtt.Server.Sdk
 			public static readonly string Timestamp = "t";
 		}
 
-		
+
+		public static char equals = '=';
+		public static char comma = ',';
+		public static char separator = '&';
+
+
 		static public GeoInfos Unmarshal (string topic) {
 
 			if (!topic.Contains(TopicFieldProperties.Location))
 				throw new FormatException($"The following topic {topic} is not a location based topic. Example: topics/loc/ll=xx.xx,yy.yy&...&...");
-
+			
 			var provider = new Globalization.NumberFormatInfo();
 			provider.NumberDecimalSeparator = ".";
 
@@ -36,7 +41,7 @@ namespace System.Net.Mqtt.Server.Sdk
 			double latitude, longitude = latitude = 0.0;
 			string shape, radius, unit, timestamp = unit = radius = shape = String.Empty;
 
-			foreach(var part in splittedTopicParts) {
+			foreach (var part in splittedTopicParts) {
 
 				var lower_part = part.ToLower();
 
@@ -64,15 +69,15 @@ namespace System.Net.Mqtt.Server.Sdk
 					SplitAndPopulate(lower_part, equals, out unit);
 					continue;
 				}
-
-				if (lower_part.StartsWith(TopicFieldProperties.Timestamp))
+				
+				if (lower_part.CompareTo(TopicFieldProperties.Timestamp) < 0 && lower_part.StartsWith(TopicFieldProperties.Timestamp))
 				{
 					SplitAndPopulate(lower_part, equals, out timestamp);
 					continue;
 				}
 
 			}
-
+			
 			return new GeoInfos {
 
 				Latitude = latitude,
@@ -91,8 +96,5 @@ namespace System.Net.Mqtt.Server.Sdk
 			populateVar = part_splitted[1];
 		}
 
-		public static char equals = '=';
-		public static char comma = ',';
-		public static char separator = '&';
 	}
 }
