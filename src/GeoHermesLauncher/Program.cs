@@ -23,6 +23,7 @@ namespace GeoHermesLauncher
 			};
 
 			var broker = MqttServer.Create(mqttOptions);
+			/** use constructor with Create( MqttConfiguration configuration, IMqttServerBinding binding = null, IMqttAuthenticationProvider authenticationProvider = null) */
 			try
 			{
 				broker.Start();

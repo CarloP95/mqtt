@@ -88,7 +88,7 @@ namespace System.Net.Mqtt.Sdk
         /// <exception cref="MqttException">MqttException</exception>
         public bool Matches (string topicName, string topicFilter)
 		{
-			if (!IsValidTopicName (topicName)) {
+            if (!IsValidTopicName (topicName)) {
 				var message = string.Format (Properties.Resources.TopicEvaluator_InvalidTopicName, topicName);
 
 				throw new MqttException (message);
@@ -140,10 +140,11 @@ namespace System.Net.Mqtt.Sdk
 				}
 			}
 
-			// Finally check if AllowLocationSubscription is true 
-			// if the two area have intersection
-			// The preminent infos are those from the subscription
-			if (configuration.AllowLocationSubscription) {
+            // Finally check if AllowLocationSubscription is true 
+            // if the two area have intersection
+            // The preminent infos are those from the subscription
+            
+            if (configuration.AllowLocationSubscription) {
 				try { 
 					var publishGeoInfos = GeoTopicUnmashaller.Unmarshal(topicName);
 					var subscriptionGeoInfos = GeoTopicUnmashaller.Unmarshal(topicFilter);

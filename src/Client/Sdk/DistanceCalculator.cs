@@ -37,6 +37,12 @@ namespace System.Net.Mqtt.Sdk
 		public static double P2PDistanceBetweenLatLon(Tuple<double, double> first, Tuple<double, double> second, string unit)
 		{
 			unit = unit.ToLower();
+            double multiplicator = 1f; // Meters
+
+            if (!IsCorrectMeasureUnit(unit, out multiplicator))
+                Console.WriteLine($"Something is wrong with measure unit: ${unit}. " +
+                    $"The System understands only ${Units.KiloMeters} and ${Units.Meters}.\n" +
+                    $"Will consider meters as default.");
 
 			var first_latToRad = second.Item1.ToRadians();
 			var second_latToRad = second.Item1.ToRadians();
@@ -52,15 +58,18 @@ namespace System.Net.Mqtt.Sdk
 
 			var distance = EarthRadius * c; // in Meters.
 
-			Console.WriteLine($"Found Results:  [a : {a}, c : {c}, d : {distance} in meters");
-
-			if (unit.CompareTo(Units.Meters) == 0)
-				return distance;
-			else if (unit.CompareTo(Units.KiloMeters) == 0)
-				return distance / 1000;
-			else
-				throw new FormatException($"Unkwown Measure Unit {unit}: List of possible values is {Units.Meters}, {Units.KiloMeters}");
+            return distance * multiplicator;
 		}
+
+		private static bool IsCorrectMeasureUnit(string unit, out int multiplicator = 0x00)
+        {
+            unit = unit.ToLower();
+            
+			if (Convert.ToBoolean(multiplicator))
+                multiplicator = !Convert.ToBoolean(unit.CompareTo(Units.KiloMeters)) ? (1f / 1000f) : 1f;
+
+            return unit.CompareTo(Units.KiloMeters) || unit.CompareTo(Units.Meters);
+        }
 
 	}
 
