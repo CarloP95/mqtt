@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Mqtt;
+using System.Net.Mqtt.Sdk;
 
 namespace GeoHermesLauncher
 {
@@ -22,7 +23,7 @@ namespace GeoHermesLauncher
 
 			};
 
-			var broker = MqttServer.Create(mqttOptions);
+			var broker = MqttServer.Create(mqttOptions, authenticationProvider: RedisAuthenticationProvider.Instance);
 			/** use constructor with Create( MqttConfiguration configuration, IMqttServerBinding binding = null, IMqttAuthenticationProvider authenticationProvider = null) */
 			try
 			{

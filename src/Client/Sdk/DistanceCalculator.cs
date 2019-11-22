@@ -37,7 +37,7 @@ namespace System.Net.Mqtt.Sdk
 		public static double P2PDistanceBetweenLatLon(Tuple<double, double> first, Tuple<double, double> second, string unit)
 		{
 			unit = unit.ToLower();
-            double multiplicator = 1f; // Meters
+			double multiplicator; // Meters
 
             if (!IsCorrectMeasureUnit(unit, out multiplicator))
                 Console.WriteLine($"Something is wrong with measure unit: ${unit}. " +
@@ -61,14 +61,15 @@ namespace System.Net.Mqtt.Sdk
             return distance * multiplicator;
 		}
 
-		private static bool IsCorrectMeasureUnit(string unit, out int multiplicator = 0x00)
+		private static bool IsCorrectMeasureUnit(string unit, out double multiplicator)
         {
             unit = unit.ToLower();
+			multiplicator = 1f;
             
 			if (Convert.ToBoolean(multiplicator))
                 multiplicator = !Convert.ToBoolean(unit.CompareTo(Units.KiloMeters)) ? (1f / 1000f) : 1f;
 
-            return unit.CompareTo(Units.KiloMeters) || unit.CompareTo(Units.Meters);
+            return Convert.ToBoolean(unit.CompareTo(Units.KiloMeters)) || Convert.ToBoolean(unit.CompareTo(Units.Meters));
         }
 
 	}

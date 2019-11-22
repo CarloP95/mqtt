@@ -13,3 +13,5 @@ packages
 .vs
 .*
 log.txt
+/icon/Thumbs.db
+/logo/Thumbs.db
