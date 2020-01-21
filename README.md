@@ -2,11 +2,8 @@
 
 > Code name: Hermes (messenger of the Greek gods)
 
+![Build Status](https://img.shields.io/docker/cloud/build/carlop95/gps-mqtt.svg)
 [![Build Status](https://dev.azure.com/devdiv/DevDiv/_apis/build/status/Xamarin/System.Net.Mqtt?branchName=master)](https://dev.azure.com/devdiv/DevDiv/_build/latest?definitionId=9488&branchName=master)
-[![Client](https://img.shields.io/nuget/vpre/System.Net.Mqtt.svg?label=client-nuget)](https://www.nuget.org/packages/System.Net.Mqtt)
-[![Downloads](https://img.shields.io/nuget/dt/System.Net.Mqtt.svg?label=client-downloads)](https://www.nuget.org/packages/System.Net.Mqtt)
-[![Server](https://img.shields.io/nuget/vpre/System.Net.Mqtt.Server.svg?label=server-nuget)](https://www.nuget.org/packages/System.Net.Mqtt.Server)
-[![Downloads](https://img.shields.io/nuget/dt/System.Net.Mqtt.Server.svg?label=server-downloads)](https://www.nuget.org/packages/System.Net.Mqtt.Server)
 
 
 MQTT is a Client Server publish/subscribe messaging transport protocol, designed to be lightweight, open and simple to use and implement. This makes it suitable for Internet of Things (IoT) messaging, machine to machine communication, mobile devices, etc.
@@ -85,23 +82,6 @@ Also, the reception of the subscribed messages is handled using an IObservable i
 * Disconnecting an MQTT client:
 
 		await client.DisconnectAsync();
-
-## Installing
-
-System.Net.Mqtt and System.Net.Mqtt.Server are distributed as [NuGet][1] packages and can be installed from Visual Studio by searching for the "System.Net.Mqtt" packages or by running the following commands from the Package Manager Console:
-
-Client Package:
-	`Install-Package System.Net.Mqtt -Pre`
-	
-Server Package:
-	`Install-Package System.Net.Mqtt.Server -Pre`
-	
-Current package dependencies:
-
-System.Diagnostics.Tracer (>= 2.0.4)
-System.Net.Sockets (>= 4.1.0)
-System.Reactive (>= 3.0.0)
-System.Runtime.Serialization.Primitives (>= 4.1.1)
 
 ## More
 
