@@ -20,6 +20,7 @@
 			WaitTimeoutSecs = 5;
 			ConnectionTimeoutSecs = 5;
 			AllowWildcardsInTopicFilters = true;
+			AllowLocationSubscription = false;
 		}
 
         /// <summary>
@@ -66,5 +67,13 @@
         /// Default value is true
         /// </summary>
 		public bool AllowWildcardsInTopicFilters { get; set; }
+
+		/// <summary>
+		/// Allow for location based subscriptions
+		/// Topics will be formed in the following way: 
+		/// topics/<b>loc</b>/ll=xx.xx,yy.yy&s=circle&r=15&u=(m|km)&t=(timestamp)
+		/// Default value is false
+		/// </summary>
+		public bool AllowLocationSubscription { get; set; }
 	}
 }
